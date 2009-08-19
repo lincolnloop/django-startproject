@@ -8,4 +8,3 @@ django==1.1
 django-extensions==0.4.1
 south==0.6
 docutils
--e git://fabfile.org/fabric.git@0.9b1#egg=fabric
