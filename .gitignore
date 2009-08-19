@@ -1,0 +1,5 @@
+*~
+*.pyc
+uploads
+myproject/conf/local/*
+myproject.egg-info

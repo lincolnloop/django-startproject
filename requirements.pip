@@ -1,0 +1,11 @@
+# This file collects all required django applications that are needed
+# to run this project. Later you can install all these apps in a row
+# using pip. Example::
+#
+#     pip install -U -r requirements.pip
+
+django==1.1
+django-extensions==0.4.1
+south==0.6
+docutils
+-e git://fabfile.org/fabric.git@0.9b1#egg=fabric
