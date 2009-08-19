@@ -2,7 +2,7 @@
 
 """
 Shows boilerplate code in the project.
-TODO: Prompt so this replaces the boilerplate autmatically.
+TODO: Prompt so this replaces the boilerplate automatically.
 
 """
 
@@ -21,6 +21,8 @@ for word in BOILERPLATE:
     print '-' * (32 + len(word)) + '\n'
     
     for path, dirs, files in os.walk(ROOT):
+        if '.git' in dirs:
+            dirs.remove('.git')
         for f in files:
             if f not in EXCLUDE:
                 file_path = os.path.join(path, f)
