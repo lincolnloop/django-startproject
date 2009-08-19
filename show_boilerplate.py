@@ -10,8 +10,9 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.realpath(__file__))
-EXCLUDE = ['show_boilerplate.py']
-BOILERPLATE = ['myproject', 'mydevhost', 'myrepohost']
+EXCLUDE_FILES = ['show_boilerplate.py']
+EXCLUDE_DIRS = ['.git', '_build']
+BOILERPLATE = ['myproject', 'myauthor', 'mydevhost', 'myrepohost']
 
 print "\nThe following files contain boilerplate code and should be edited."
 print "=================================================================="
@@ -21,10 +22,11 @@ for word in BOILERPLATE:
     print '-' * (32 + len(word)) + '\n'
     
     for path, dirs, files in os.walk(ROOT):
-        if '.git' in dirs:
-            dirs.remove('.git')
+        for d in dirs:
+            if d in EXCLUDE_DIRS:
+                dirs.remove(d)
         for f in files:
-            if f not in EXCLUDE:
+            if f not in EXCLUDE_FILES:
                 file_path = os.path.join(path, f)
                 contents = open(file_path, 'rb').read()
                 bp = re.findall(word, contents)

@@ -1,5 +1,6 @@
 *~
 *.pyc
+docs/_build/*
 uploads
 myproject/conf/local/*
 myproject.egg-info
