@@ -19,8 +19,11 @@ print "\nThe following files contain boilerplate code and should be edited."
 print "=================================================================="
 
 for word in BOILERPLATE:
-    print "\nOccurences of '%s' in startproject" % word
-    print '-' * (32 + len(word)) + '\n'
+    title = "Occurrences of '%s' in project_template" % word
+    print
+    print title
+    print '-' * len(title)
+    print
     
     for path, dirs, files in os.walk(ROOT):
         for d in dirs:
