@@ -9,9 +9,10 @@ TODO: Prompt so this replaces the boilerplate automatically.
 import os
 import re
 
-ROOT = os.path.dirname(os.path.realpath(__file__))
-EXCLUDE_FILES = ['show_boilerplate.py']
-EXCLUDE_DIRS = ['.git', '_build']
+ROOT = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                    'project_template')
+EXCLUDE_FILES = []
+EXCLUDE_DIRS = []
 BOILERPLATE = ['myproject', 'myauthor', 'mydevhost', 'myrepohost']
 
 print "\nThe following files contain boilerplate code and should be edited."
