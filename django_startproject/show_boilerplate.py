@@ -8,9 +8,9 @@ TODO: Prompt so this replaces the boilerplate automatically.
 
 import os
 import re
+from django_startproject import settings
 
-ROOT = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                    'project_template')
+
 EXCLUDE_FILES = []
 EXCLUDE_DIRS = []
 BOILERPLATE = ['myproject', 'myauthor', 'mydevhost', 'myrepohost']
@@ -25,14 +25,16 @@ for word in BOILERPLATE:
     print '-' * len(title)
     print
     
-    for path, dirs, files in os.walk(ROOT):
+    for path, dirs, files in os.walk(settings.TEMPLATE_DIR):
         for d in dirs:
             if d in EXCLUDE_DIRS:
                 dirs.remove(d)
         for f in files:
-            if f not in EXCLUDE_FILES:
-                file_path = os.path.join(path, f)
-                contents = open(file_path, 'rb').read()
-                bp = re.findall(word, contents)
-                if bp:
-                    print len(bp), file_path.replace(ROOT, '.')
+            if f in EXCLUDE_FILES:
+                continue
+            file_path = os.path.join(path, f)
+            contents = open(file_path, 'r').read()
+            bp = re.findall(word, contents)
+            if bp:
+                print '%2d .%s' % (len(bp),
+                                   file_path[len(settings.TEMPLATE_DIR):])

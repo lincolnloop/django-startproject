@@ -1,0 +1,3 @@
+*.pyc
+django_startproject.egg-info
+build
