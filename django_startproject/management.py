@@ -9,6 +9,10 @@ TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.realpath(utils.__file__)),
 
 
 def start_project():
+    """
+    Copy a project template, replacing boilerplate variables.
+ 
+    """
     usage = "usage: %prog [options] project_name [base_destination_dir]"
     parser = optparse.OptionParser(usage=usage)
     parser.add_option('-t', '--template-dir', dest='src_dir',

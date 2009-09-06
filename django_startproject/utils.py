@@ -11,6 +11,7 @@ def copy_template(src, dest, replace=None):
     To replace boilerplate strings in the source data, pass a dictionary to the
     ``replace`` argument where each key is the boilerplate string and the
     corresponding value is the string which should replace it.
+    
     """
     for path, dirs, files in os.walk(src):
         relative_path = path[len(src):].lstrip('/')
@@ -33,6 +34,7 @@ def copy_template_file(src, dest, replace=None):
     To replace boilerplate strings in the source data, pass a dictionary to the
     ``replace`` argument where each key is the boilerplate string and the
     corresponding value is the string which should replace it.
+    
     """
     replace = replace or {}
     # Read the data from the source file.
@@ -64,6 +66,7 @@ def get_boilerplate(path):
     
     If no file was found (or no lines contained boilerplate variables), return
     an empty list.
+    
     """
     boilerplate = []
     boilerplate_path = os.path.join(path, '.startproject_boilerplate')
