@@ -12,6 +12,9 @@ def copy_template(src, dest, replace=None):
     ``replace`` argument where each key is the boilerplate string and the
     corresponding value is the string which should replace it.
     
+    The destination file paths are also parsed through the boilerplate
+    replacements, so directories and file names may also be modified.
+    
     """
     for path, dirs, files in os.walk(src):
         relative_path = path[len(src):].lstrip('/')
@@ -23,7 +26,11 @@ def copy_template(src, dest, replace=None):
             if f.startswith('.startproject') or f.endswith('.pyc'):
                 continue
             src_file_path = os.path.join(path, f)
-            dest_file_path = os.path.join(dest, relative_path, f)
+            dest_file_path = os.path.join(relative_path, f)
+            # Replace boilerplate strings in destination file path.
+            for old_val, new_val in replace.items():
+                dest_file_path = dest_file_path.replace(old_val, new_val)
+            dest_file_path = os.path.join(dest, dest_file_path)
             copy_template_file(src_file_path, dest_file_path, replace)
 
 
