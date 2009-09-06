@@ -41,7 +41,7 @@ If you have the project source checked out already, place it in a ``myproject``
 directory inside the virtual environment source (``src``) directory. 
 Otherwise, checkout the source now::
 
-    pip install -e git@myrepohost:myproject.git
+    pip install -e git+ssh://git@myrepohost:myproject.git
 
 Next, install the requirements and the project source::
 

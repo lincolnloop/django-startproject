@@ -64,17 +64,26 @@ def copy_template_file(src, dest, replace=None):
         os.chmod(dest, new_permissions)
 
 
-def get_boilerplate(path):
+def get_boilerplate(path, project_name):
     """
     Look for a ``.startproject_boilerplate`` file the given path and parse it.
     
-    Return a 2-tuple list of the boilerplate variables and optional
-    descriptions.
+    Return a list of 3-part tuples, each containing a boilerplate variable,
+    optional description and default value.
     
     If no file was found (or no lines contained boilerplate variables), return
     an empty list.
     
     """
+    defaults = {}
+    defaults_path = os.path.join(path, '.startproject_defaults')
+    if os.path.isfile(defaults_path):
+        defaults_file = open(defaults_path, 'r')
+        for line in defaults_file:
+            match = re.match(r'\s*(\w+)\s*(.*)$', line)
+            if match:
+                var, default = match.groups()
+                defaults[var] = default
     boilerplate = []
     boilerplate_path = os.path.join(path, '.startproject_boilerplate')
     if os.path.isfile(boilerplate_path):
@@ -82,5 +91,7 @@ def get_boilerplate(path):
         for line in boilerplate_file:
             match = re.match(r'\s*(\w+)\s*(.*)$', line)
             if match:
-                boilerplate.append(match.groups())
+                var, description = match.groups()
+                default = defaults.get(var)
+                boilerplate.append((var, description, default))
     return boilerplate

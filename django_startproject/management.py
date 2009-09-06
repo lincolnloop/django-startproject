@@ -33,13 +33,8 @@ def start_project():
 
     # Get any boilerplate replacement variables:
     replace = {}
-    for var, help in utils.get_boilerplate(src):
-        if var in ('project_name', 'myproject'):
-            default = project_name
-        elif var in ('myauthor',):
-            default = 'Lincoln Loop'
-        else:
-            default = None
+    for var, help, default in utils.get_boilerplate(src, project_name):
+        help = help or var
         if default is not None:
             prompt = '%s [%s]: ' % (help, default)
         else:
