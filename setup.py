@@ -20,8 +20,8 @@ setup(name = 'django-startproject',
       version = '1.0a',
       author = 'Lincoln Loop',
       author_email = 'info@lincolnloop.com',
-      description = ('Create a standard Django project layout based on '
-                     'Lincoln Loop standards.'),
+      description = ('Create a Django project layout based on Lincoln Loop '
+                     'best practices.'),
       packages = ['django_startproject'],
       package_data={'django_startproject': STARTPROJECT_DATA},
       scripts = ['bin/django-startproject.py'],
