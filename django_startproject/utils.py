@@ -18,19 +18,22 @@ def copy_template(src, dest, replace=None):
     """
     for path, dirs, files in os.walk(src):
         relative_path = path[len(src):].lstrip('/')
+        # Replace boilerplate strings in destination directory.
+        for old_val, new_val in replace.items():
+            relative_path = relative_path.replace(old_val, new_val)
         os.mkdir(os.path.join(dest, relative_path))
         for i, subdir in enumerate(dirs):
             if subdir.startswith('.'):
                 del dirs[i]
-        for f in files:
-            if f.startswith('.startproject') or f.endswith('.pyc'):
+        for filename in files:
+            if (filename.startswith('.startproject') or
+                filename.endswith('.pyc')):
                 continue
-            src_file_path = os.path.join(path, f)
-            dest_file_path = os.path.join(relative_path, f)
-            # Replace boilerplate strings in destination file path.
+            src_file_path = os.path.join(path, filename)
+            # Replace boilerplate strings in destination filename.
             for old_val, new_val in replace.items():
-                dest_file_path = dest_file_path.replace(old_val, new_val)
-            dest_file_path = os.path.join(dest, dest_file_path)
+                filename = filename.replace(old_val, new_val)
+            dest_file_path = os.path.join(dest, relative_path, filename)
             copy_template_file(src_file_path, dest_file_path, replace)
 
 
