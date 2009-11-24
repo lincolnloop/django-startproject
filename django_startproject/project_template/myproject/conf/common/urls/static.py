@@ -7,7 +7,9 @@ urlpatterns = []
 
 
 # Serve up static media if we're running the local development server.
-if 'runserver' in sys.argv or 'testserver' in sys.argv:
+if 'runserver' in sys.argv or \
+   'runserver_plus' in sys.argv or \
+   'testserver' in sys.argv:
     urlpatterns += patterns('django.views.static',
         url(r'^%s(?P<path>.*)$' % settings.MEDIA_URL[1:], 'serve',
             {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
