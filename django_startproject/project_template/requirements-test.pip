@@ -1,0 +1,4 @@
+coverage==3.2b3
+http://bitbucket.org/cmheisel/nose/get/tip.tar.gz#egg=nose
+git+git://github.com/jbalogh/django-nose.git#egg=django-nose
+pylint
