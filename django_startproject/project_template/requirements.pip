@@ -6,5 +6,6 @@
 
 django==1.1.1
 django-extensions==0.4.1
+django-static-url==0.9.1
 south==0.6
 docutils

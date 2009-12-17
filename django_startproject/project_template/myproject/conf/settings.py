@@ -52,6 +52,7 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
+    'static_url.context_processors.static_url',
 )
 
 INSTALLED_APPS = (
@@ -63,5 +64,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.humanize',
     'django_extensions',
+    'static_url',
     'south',
 )
