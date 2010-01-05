@@ -2,5 +2,5 @@
 *.pyc
 docs/_build/*
 uploads
-myproject/conf/local/*
+myproject/conf/local/*.py
 myproject.egg-info
