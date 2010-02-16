@@ -1,5 +1,7 @@
+"Serves up static media when using runserver"
+
 import sys
-from django.conf.urls.defaults import patterns, urls
+from django.conf.urls.defaults import patterns, include 
 
 urlpatterns = []
 
