@@ -3,4 +3,5 @@
 docs/_build/*
 uploads
 myproject/conf/local/*.py
+dev.db
 myproject.egg-info
