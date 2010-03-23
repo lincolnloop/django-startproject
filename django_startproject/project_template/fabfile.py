@@ -14,6 +14,17 @@ def update():
     syncdb()
     restart()
 
+def push():
+    """
+    Update source and restart
+
+    This is similar to `update` but it does not update all the requirements
+    and does not execute migrations. Perfect for minor changes.
+    """
+    local('git push') # TODO: use an explicit branch here?
+    update_proj()
+    restart()
+
 def version():
     """Show last commit to repo on server"""
     sshagent_run('cd %s; git log -1' % env.proj_root)
@@ -40,6 +51,7 @@ def evolve():
     ve_run('manage.py evolve --execute --noinput')
 
 def migrate():
+    """Execute south migrations"""
     ve_run('manage.py migrate')
 
 def ve_run(cmd):
