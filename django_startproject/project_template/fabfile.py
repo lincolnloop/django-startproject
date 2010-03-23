@@ -10,6 +10,7 @@ def update():
     """Update source, update pip requirements, syncdb, restart server"""
     update_proj()
     update_reqs()
+    migrate()
     syncdb()
     restart()
 
@@ -37,6 +38,9 @@ def syncdb():
 
 def evolve():
     ve_run('manage.py evolve --execute --noinput')
+
+def migrate():
+    ve_run('manage.py migrate')
 
 def ve_run(cmd):
     """
