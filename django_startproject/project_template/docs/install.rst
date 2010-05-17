@@ -51,11 +51,6 @@ Next, install the requirements and the project source::
 Configuring a Local Environment
 ===============================
 
-To make it easier to manage the project from the virtual environment, copy the
-management file to ``bin`` so it can be run from anywhere::
-
-    ln -s src/myproject/myproject/bin/manage.py ./bin
-
 If you're just checking the project out locally, you can copy some example
 configuration files to get started quickly::
 
