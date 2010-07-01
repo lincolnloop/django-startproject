@@ -35,7 +35,7 @@ def restart():
 
 def update_reqs():
     """Update pip requirements"""
-    ve_run('pip install -E %s -r %s' % (env.root, env.pip_file))
+    ve_run('yes w | pip install -E %s -r %s' % (env.root, env.pip_file))
 
 def update_proj():
     """Updates project source"""
