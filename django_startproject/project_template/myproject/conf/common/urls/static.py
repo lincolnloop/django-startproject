@@ -2,6 +2,7 @@
 
 import sys
 from django.conf.urls.defaults import patterns, include 
+from staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = []
 
@@ -9,6 +10,4 @@ urlpatterns = []
 if 'runserver' in sys.argv or \
    'runserver_plus' in sys.argv or \
    'testserver' in sys.argv:
-    urlpatterns += patterns('', 
-        (r'', include('staticfiles.urls')),
-    )
+    urlpatterns += staticfiles_urlpatterns()
