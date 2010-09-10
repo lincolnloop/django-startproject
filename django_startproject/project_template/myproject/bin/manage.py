@@ -21,13 +21,10 @@ except ImportError:
                          PROJECT_MODULE_NAME)
         sys.exit(1)
 
-# Try to use ``[project].conf.local.settings`` (not checked in to repository),
-# falling back to using ``[project].conf.settings``.
-settings_module = '%s.conf.local.settings' % PROJECT_MODULE_NAME
-try:
-    __import__(settings_module, globals(), locals(), [])
-except ImportError:
-    settings_module = '%s.conf.settings' % PROJECT_MODULE_NAME
+# If DJANGO_SETTINGS_MODULE doesn't exist, try to use ``[project].conf.local.settings``
+# This gets overridden if settings are passed in to manage.py 
+if not 'DJANGO_SETTINGS_MODULE' in os.environ:
+    settings_module = '%s.conf.local.settings' % PROJECT_MODULE_NAME
+    os.environ['DJANGO_SETTINGS_MODULE'] = settings_module
 
-os.environ['DJANGO_SETTINGS_MODULE'] = settings_module
 execute_from_command_line()
