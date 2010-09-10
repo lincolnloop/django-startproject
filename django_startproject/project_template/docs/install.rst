@@ -64,7 +64,7 @@ Building Documentation
 Documentation is available in ``docs`` and can be built into a number of 
 formats using `Sphinx <http://pypi.python.org/pypi/Sphinx>`_. To get started::
 
-    pip install sphinx
+    pip install Sphinx
     cd docs
     make html
 
