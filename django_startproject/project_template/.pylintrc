@@ -167,9 +167,7 @@ zope=no
 
 # List of members which are set dynamically and missed by pylint inference
 # system, and so shouldn't trigger E0201 when accessed.
-generated-members=objects,DoesNotExist,id,pk,_default_manager,_meta,add_closedcaption,add_inheritance,add_rendition,add_sequence,add_sibling,add_thumbnail,add_transcript,change_password,connect,create_asset,create_closedcaption,create_file,create_folder,create_rendition,create_thumbnail,create_transcript,delete_asset,delete_closedcaption,delete_file,delete_folder,delete_rendition,delete_thumbnail,delete_transcript,forgot_password,get_asset,get_assets,get_closedcaption,get_file,get_files,get_folder,get_folders,get_profile,get_rendition,get_thumbnail,get_transcript,get_users,login,move_file,move_folder,register,remove_closedcaption,remove_rendition,remove_thumbnail,remove_transcript,reset_password,search,submit_asset,submit_folder,unregister,update_asset,update_closedcaption,update_file,update_folder,update_profile,update_rendition,update_thumbnail,update_transcript,_service_list,_signals,base_fields,context
-
-
+generated-members=objects,DoesNotExist,id,pk,_default_manager,_meta
 # checks for
 # * unused variables / imports
 # * undefined variables
