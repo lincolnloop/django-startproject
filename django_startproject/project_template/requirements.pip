@@ -4,8 +4,8 @@
 #
 #     pip install -U -r requirements.pip
 
-django==1.2.1
+django==1.2.3
 django-extensions==0.5
-django-staticfiles==0.3.0
+django-staticfiles==0.3.2
 south==0.7.2
 docutils
