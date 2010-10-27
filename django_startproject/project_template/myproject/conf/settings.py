@@ -8,6 +8,8 @@ import myproject
 PROJECT_ROOT, PROJECT_MODULE_NAME = os.path.split(
     os.path.dirname(os.path.realpath(myproject.__file__))
 )
+# This assumes the project is installed in the src directory of a virtualenv.
+VAR_ROOT = os.path.join(os.path.dirname(os.path.dirname(PROJECT_ROOT)), 'var')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -31,10 +33,7 @@ USE_I18N = True
 ADMIN_MEDIA_PREFIX = '/admin-media/'
 
 MEDIA_URL = '/uploads/'
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
-
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, PROJECT_MODULE_NAME, 'static')
 
 ROOT_URLCONF = 'myproject.conf.urls'
 
