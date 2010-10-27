@@ -1,14 +1,16 @@
 from myproject.conf.settings import *
 
-DEBUG=False
-TEMPLATE_DEBUG=False
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
-# Database connection info.
-DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = ':memory:'            # Or path to database file if using sqlite3.
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
+}
 ROOT_URLCONF = 'myproject.conf.test.urls'
 
-INSTALLED_APPS += ('django_nose', )
+INSTALLED_APPS += ('django_nose',)
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
