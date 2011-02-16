@@ -1,3 +1,4 @@
-Documentation is available in Sphinx format in the docs folder.
+Developer documentation is available in Sphinx format in the docs directory.
 
-For installation instructions see docs/install.rst.
+Initial installation instructions (including how to build the documentation as
+HTML) can be found in docs/install.rst.

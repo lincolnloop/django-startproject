@@ -7,4 +7,3 @@
 django==1.2.5
 django-staticfiles==0.3.4
 south==0.7.3
-docutils
