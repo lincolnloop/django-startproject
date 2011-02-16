@@ -6,10 +6,13 @@ Staging/Development
 
 `Fabric <http://pypi.python.org/pypi/Fabric>`_ is used to allow developers to
 easily push changes to a previously setup development/staging environment.
-To get started, run the following command from within your virtual environment::
+To get started, run the following command from within your virtual
+environment::
 
-    pip install -e git://fabfile.org/fabric.git@0.9b1#egg=fabric
+    pip install fabric==0.9.3
     fab --fabfile src/myproject/fabfile.py -l
 
 This will install Fabric and provide a list of available commands.
-    
+
+When run from src/myproject, you can just run ``fab [command]`` (i.e. without
+the ``-fabfile`` flag).
