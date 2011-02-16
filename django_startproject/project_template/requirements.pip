@@ -2,10 +2,9 @@
 # to run this project. Later you can install all these apps in a row
 # using pip. Example::
 #
-#     pip install -U -r requirements.pip
+#     pip install -r requirements.pip
 
-django==1.2.3
-django-extensions==0.5
-django-staticfiles==0.3.2
-south==0.7.2
+django==1.2.5
+django-staticfiles==0.3.4
+south==0.7.3
 docutils

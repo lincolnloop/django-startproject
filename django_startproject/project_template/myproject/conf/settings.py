@@ -1,39 +1,53 @@
 # Import global settings to make it easier to extend settings. 
 from django.conf.global_settings import *
-# Import the project module to calculate directories relative to the module
-# location.
-import os
-import myproject
 
-PROJECT_ROOT, PROJECT_MODULE_NAME = os.path.split(
-    os.path.dirname(os.path.realpath(myproject.__file__))
-)
-# This assumes the project is installed in the src directory of a virtualenv.
-VAR_ROOT = os.path.join(os.path.dirname(os.path.dirname(PROJECT_ROOT)), 'var')
+#==============================================================================
+# Generic Django project settings
+#==============================================================================
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'America/Chicago'
-
+USE_I18N = True
 SITE_ID = 1
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
-USE_I18N = True
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = ''
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/admin-media/'
+#==============================================================================
+# Calculation of directories relative to the module location
+#==============================================================================
+import os
+import sys
+import myproject
+
+PROJECT_ROOT, PROJECT_MODULE_NAME = os.path.split(
+    os.path.dirname(os.path.realpath(myproject.__file__))
+)
+
+PYTHON_BIN = os.path.dirname(sys.executable)
+if os.path.exists(os.path.join(PYTHON_BIN, 'activate_this.py')):
+    # Assume that the presence of 'activate_this.py' in the python bin/
+    # directory means that we're running in a virtual environment. Set the
+    # variable root to $VIRTUALENV/var.
+    VAR_ROOT = os.path.join(os.path.dirname(PYTHON_BIN), 'var')
+    if not os.path.exists(VAR_ROOT):
+        os.mkdir(VAR_ROOT)
+else:
+    # Set the variable root to the local configuration location (which is
+    # ignored by the repository).
+    VAR_ROOT = os.path.join(PROJECT_ROOT, PROJECT_MODULE_NAME, 'conf', 'local')
+
+#==============================================================================
+# Project URLS and media settings
+#==============================================================================
 
 MEDIA_URL = '/uploads/'
 STATIC_URL = '/static/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 ROOT_URLCONF = 'myproject.conf.urls'
 
@@ -41,16 +55,15 @@ LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 LOGIN_REDIRECT_URL = '/'
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = ''
-
+#==============================================================================
+# Templates
+#==============================================================================
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, PROJECT_MODULE_NAME, 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS += (
-    'django.core.context_processors.request',
     'staticfiles.context_processors.static_url',
 )
 
@@ -62,7 +75,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.humanize',
-    'django_extensions',
     'staticfiles',
     'south',
 )
