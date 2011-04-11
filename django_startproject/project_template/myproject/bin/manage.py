@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 
 # Work out the project module name and root directory, assuming that this file
 # is located at [project]/bin/manage.py
-PROJECT_ROOT, PROJECT_MODULE_NAME = os.path.split(
+PROJECT_DIR, PROJECT_MODULE_NAME = os.path.split(
                 os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 # Check that the project module can be imported.
@@ -15,7 +15,7 @@ try:
     __import__(PROJECT_MODULE_NAME)
 except ImportError:
     # Couldn't import the project, place it on the Python path and try again.
-    sys.path.append(PROJECT_ROOT)
+    sys.path.append(PROJECT_DIR)
     try:
         __import__(PROJECT_MODULE_NAME)
     except ImportError:

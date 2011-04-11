@@ -24,7 +24,7 @@ import os
 import sys
 import myproject
 
-PROJECT_ROOT, PROJECT_MODULE_NAME = os.path.split(
+PROJECT_DIR, PROJECT_MODULE_NAME = os.path.split(
     os.path.dirname(os.path.realpath(myproject.__file__))
 )
 
@@ -39,7 +39,7 @@ if os.path.exists(os.path.join(PYTHON_BIN, 'activate_this.py')):
 else:
     # Set the variable root to the local configuration location (which is
     # ignored by the repository).
-    VAR_ROOT = os.path.join(PROJECT_ROOT, PROJECT_MODULE_NAME, 'conf', 'local')
+    VAR_ROOT = os.path.join(PROJECT_DIR, PROJECT_MODULE_NAME, 'conf', 'local')
 
 #==============================================================================
 # Project URLS and media settings
@@ -60,7 +60,7 @@ LOGIN_REDIRECT_URL = '/'
 #==============================================================================
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, PROJECT_MODULE_NAME, 'templates'),
+    os.path.join(PROJECT_DIR, PROJECT_MODULE_NAME, 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS += (
