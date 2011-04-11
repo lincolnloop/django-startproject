@@ -49,6 +49,9 @@ MEDIA_URL = '/uploads/'
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
+STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
+#MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
+
 ROOT_URLCONF = 'myproject.conf.urls'
 
 LOGIN_URL = '/accounts/login/'
