@@ -52,7 +52,7 @@ def ve_run(cmd):
     Runs a command using the virtualenv environment
     """
     require('root')
-    return run('source %s/bin/activate; %s' % (env.root, cmd))
+    return sshagent_run('source %s/bin/activate; %s' % (env.root, cmd))
 
 
 def sshagent_run(cmd):
