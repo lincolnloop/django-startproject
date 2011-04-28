@@ -17,7 +17,7 @@ def copy_template(src, dest, replace=None):
     
     """
     for path, dirs, files in os.walk(src):
-        relative_path = path[len(src):].lstrip('/')
+        relative_path = path[len(src):].lstrip(os.sep)
         # Replace boilerplate strings in destination directory.
         for old_val, new_val in replace.items():
             relative_path = relative_path.replace(old_val, new_val)
