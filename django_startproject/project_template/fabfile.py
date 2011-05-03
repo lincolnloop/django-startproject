@@ -1,9 +1,11 @@
-from fabric.api import env, local, run, require
+from fabric.api import env, local, run, require, cd
+from fabric.operations import _prefix_commands, _prefix_env_vars
 
 env.disable_known_hosts = True # always fails for me without this
 env.hosts = ['myproject.mydevhost']
 env.root = '/opt/webapps/myproject'
 env.proj_root = env.root + '/src/myproject'
+env.proj_repo = 'git@github.com:myuser/myrepo.git'
 env.pip_file = env.proj_root + '/requirements.pip'
 
 
@@ -17,13 +19,15 @@ def deploy():
 
 def switch(branch):
     """Switch the repo branch which the server is using"""
-    ve_run('cd %s; git checkout %s' % (env.proj_root, branch))
+    with cd(env.proj_root):
+        ve_run('git checkout %s' % branch)
     restart()
 
 
 def version():
     """Show last commit to repo on server"""
-    print sshagent_run('cd %s; git log -1' % env.proj_root)
+    with cd(env.proj_root):
+        sshagent_run('git log -1')
 
 
 def restart():
@@ -38,12 +42,24 @@ def update_reqs():
 
 def update():
     """Updates project source"""
-    print sshagent_run('cd %s; git pull' % env.proj_root)
+    with cd(env.proj_root):
+        sshagent_run('git pull')
 
 
 def syncdb():
     """Run syncdb (along with any pending south migrations)"""
     ve_run('manage.py syncdb --migrate')
+
+
+def clone():
+    """Clone the repository for the first time"""
+    with cd('%s/src' % env.root):
+        sshagent_run('git clone %s' % env.proj_repo)
+    ve_run('pip install -e %s' % env.proj_root)
+    
+    with cd('%s/myproject/conf/local' % env.proj_root):
+        run('ln -s ../dev/__init__.py')
+        run('ln -s ../dev/settings.py')
 
 
 def ve_run(cmd):
@@ -59,13 +75,18 @@ def sshagent_run(cmd):
     """
     Helper function.
     Runs a command with SSH agent forwarding enabled.
-    
-    Note:: Fabric (and paramiko) can't forward your SSH agent. 
+
+    Note:: Fabric (and paramiko) can't forward your SSH agent.
     This helper uses your system's ssh to do so.
     """
-    for h in env.hosts:
-        try:
-            host, port = h.split(':')
-            local('ssh -p %s -A %s "%s"' % (port, host, cmd))
-        except ValueError:
-            local('ssh -A %s "%s"' % (h, cmd))
+    # Handle context manager modifications
+    wrapped_cmd = _prefix_commands(_prefix_env_vars(cmd), 'remote')
+    try:
+        host, port = env.host_string.split(':')
+        return local(
+            "ssh -p %s -A %s@%s '%s'" % (port, env.user, host, wrapped_cmd)
+        )
+    except ValueError:
+        return local(
+            "ssh -A %s@%s '%s'" % (env.user, env.host_string, wrapped_cmd)
+        )
