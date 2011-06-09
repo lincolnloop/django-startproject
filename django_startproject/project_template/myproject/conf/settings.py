@@ -45,18 +45,21 @@ else:
 # Project URLS and media settings
 #==============================================================================
 
-MEDIA_URL = '/uploads/'
-STATIC_URL = '/static/'
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-
-STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
-#MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
-
 ROOT_URLCONF = 'myproject.conf.urls'
 
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 LOGIN_REDIRECT_URL = '/'
+
+MEDIA_URL = '/uploads/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
+#MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_DIR, PROJECT_MODULE_NAME, 'static'),
+)
 
 #==============================================================================
 # Templates
@@ -67,7 +70,7 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS += (
-    'staticfiles.context_processors.static_url',
+    # 'Custom context processors here',
 )
 
 INSTALLED_APPS = (
@@ -78,5 +81,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.humanize',
+    'django.contrib.staticfiles',
     'south',
 )
