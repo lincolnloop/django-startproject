@@ -5,8 +5,6 @@ TEMPLATE_DEBUG = DEBUG
 
 ROOT_URLCONF = 'myproject.conf.dev.urls'
 
-MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -15,3 +13,8 @@ DATABASES = {
 #        'PASSWORD': 'dbpassword',
     }
 }
+
+INSTALLED_APPS += (
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+)

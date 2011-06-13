@@ -21,5 +21,3 @@ INSTALLED_APPS += (
     'django.contrib.admin',
     'django.contrib.admindocs',
 )
-
-MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
